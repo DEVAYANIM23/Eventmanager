@@ -1,0 +1,2 @@
+# Eventmanager
+ This Eventmanager project is a User Dashboard and Aadmin Dashboard built using React, where users can manage their bookings, view upcoming events, and update their profile image. The dashboard integrates with Firebase Firestore to dynamically fetch and display upcoming events, and it includes several interactive features such as profile image uploads, bookings management, and event notifications.
