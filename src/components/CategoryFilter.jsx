@@ -34,7 +34,7 @@ function CategoryFilter({ selectedCategory, setSelectedCategory }) {
   // Style for the active category button
   const activeButtonStyle = {
     ...buttonStyle,
-    backgroundColor: "#4C51BF", // Indigo background
+    backgroundColor: "#2563EB", // Indigo background
     color: "#ffffff", // White text
   };
 
