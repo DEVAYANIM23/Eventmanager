@@ -1,7 +1,7 @@
-// App.jsx
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer"; // Import Footer component
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -24,51 +24,59 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50">
+      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", backgroundColor: "#F7FAFC" }}>
+        {/* Fixed Header */}
         <Header />
-        <Routes>
-          {/* Public Routes */}
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/login"
-            element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" />}
-          />
-          <Route
-            path="/signup"
-            element={!isAuthenticated ? <SignUp /> : <Navigate to="/dashboard" />}
-          />
 
-          {/* Event Details */}
-          <Route path="/events/:id" element={<EventDetails />} />
+        {/* Main Content */}
+        <main style={{ paddingTop: "80px", paddingBottom: "64px", flex: 1, overflowY: "auto" }}>
+          <Routes>
+            {/* Public Routes */}
+            <Route path="/" element={<Home />} />
+            <Route
+              path="/login"
+              element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard" />}
+            />
+            <Route
+              path="/signup"
+              element={!isAuthenticated ? <SignUp /> : <Navigate to="/dashboard" />}
+            />
 
-          {/* Protected Routes */}
-          <Route
-            path="/dashboard"
-            element={
-              <PrivateRoute>
-                <UserDashboard />
-              </PrivateRoute>
-            }
-          />
+            {/* Event Details */}
+            <Route path="/events/:id" element={<EventDetails />} />
 
-          {/* Admin routes */}
-          <Route
-            path="/admin"
-            element={
-              <PrivateRoute adminOnly>
-                <AdminDashboard />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/create-event"
-            element={
-              <PrivateRoute adminOnly>
-                <CreateEvent />
-              </PrivateRoute>
-            }
-          />
-        </Routes>
+            {/* Protected Routes */}
+            <Route
+              path="/dashboard"
+              element={
+                <PrivateRoute>
+                  <UserDashboard />
+                </PrivateRoute>
+              }
+            />
+
+            {/* Admin routes */}
+            <Route
+              path="/admin"
+              element={
+                <PrivateRoute adminOnly>
+                  <AdminDashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/create-event"
+              element={
+                <PrivateRoute adminOnly>
+                  <CreateEvent />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </main>
+
+        {/* Fixed Footer */}
+        <Footer />
       </div>
     </Router>
   );

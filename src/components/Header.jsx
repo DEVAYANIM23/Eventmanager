@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
+import CategoryFilter from './CategoryFilter'; // Make sure you import CategoryFilter
 
 function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -13,105 +14,161 @@ function Header() {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <header className="bg-blue-600 shadow p-4">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-bold text-white">
-          Event Manager
-        </Link>
+    <header
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 10,
+        backgroundColor: '#2B6CB0',
+        boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+        padding: '17px 0',
+      }}
+    >
+      <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 16px' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          {/* Logo */}
+          <Link to="/" style={{ fontSize: '24px', fontWeight: 'bold', color: 'white' }}>
+            Event Manager
+          </Link>
 
-        {/* Navigation */}
-        <nav>
-          <ul className="flex items-center space-x-4">
-            {/* Home Link */}
-            <li>
-              <Link
-                to="/"
-                className={`px-4 py-2 w-32 text-center rounded font-bold ${
-                  isActive('/')
-                    ? 'bg-white text-blue-600 shadow-md'
-                    : 'text-white hover:bg-blue-500 hover:shadow'
-                }`}
-              >
-                Home
-              </Link>
-            </li>
-
-            {/* Show Login/Sign Up for unauthenticated users */}
-            {!isAuthenticated && (
-              <>
-                <li>
-                  <Link
-                    to="/login"
-                    className={`px-4 py-2 w-32 text-center rounded font-bold ${
-                      isActive('/login')
-                        ? 'bg-white text-blue-600 shadow-md'
-                        : 'text-white hover:bg-blue-500 hover:shadow'
-                    }`}
-                  >
-                    Login
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="/signup"
-                    className={`px-4 py-2 w-32 text-center rounded font-bold ${
-                      isActive('/signup')
-                        ? 'bg-white text-blue-600 shadow-md'
-                        : 'text-white hover:bg-blue-500 hover:shadow'
-                    }`}
-                  >
-                    Sign Up
-                  </Link>
-                </li>
-              </>
-            )}
-
-            {/* Admin Dashboard for admin users */}
-            {isAuthenticated && userRole === 'admin' && (
+          {/* Navigation */}
+          <nav>
+            <ul style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+              {/* Home Link */}
               <li>
                 <Link
-                  to="/admin"
-                  className={`px-4 py-2 w-32 text-center rounded font-bold ${
-                    isActive('/admin')
-                      ? 'bg-green-600 text-white shadow-md'
-                      : 'bg-green-500 text-white hover:bg-green-400 hover:shadow'
-                  }`}
+                  to="/"
+                  style={{
+                    padding: '8px 16px',
+                    width: '128px',
+                    textAlign: 'center',
+                    borderRadius: '8px',
+                    fontWeight: 'bold',
+                    backgroundColor: isActive('/') ? 'white' : 'transparent',
+                    color: isActive('/') ? '#2B6CB0' : 'white',
+                    boxShadow: isActive('/') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                    textDecoration: 'none',
+                  }}
                 >
-                  Admin Dashboard
+                  Home
                 </Link>
               </li>
-            )}
 
-            {/* Dashboard for non-admin users */}
-            {isAuthenticated && userRole !== 'admin' && (
-              <li>
-                <Link
-                  to="/dashboard"
-                  className={`px-4 py-2 w-32 text-center rounded font-bold ${
-                    isActive('/dashboard')
-                      ? 'bg-white text-blue-600 shadow-md'
-                      : 'text-white hover:bg-blue-500 hover:shadow'
-                  }`}
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
+              {/* Show Login/Sign Up for unauthenticated users */}
+              {!isAuthenticated && (
+                <>
+                  <li>
+                    <Link
+                      to="/login"
+                      style={{
+                        padding: '8px 16px',
+                        width: '128px',
+                        textAlign: 'center',
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        backgroundColor: isActive('/login') ? 'white' : 'transparent',
+                        color: isActive('/login') ? '#2B6CB0' : 'white',
+                        boxShadow: isActive('/login') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Login
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/signup"
+                      style={{
+                        padding: '8px 16px',
+                        width: '128px',
+                        textAlign: 'center',
+                        borderRadius: '8px',
+                        fontWeight: 'bold',
+                        backgroundColor: isActive('/signup') ? 'white' : 'transparent',
+                        color: isActive('/signup') ? '#2B6CB0' : 'white',
+                        boxShadow: isActive('/signup') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Sign Up
+                    </Link>
+                  </li>
+                </>
+              )}
 
-            {/* Logout button */}
-            {isAuthenticated && (
-              <li>
-                <button
-                  onClick={logout}
-                  className="px-4 py-2 w-32 text-center rounded font-bold bg-red-500 text-white hover:bg-red-400 hover:shadow"
-                >
-                  Logout
-                </button>
-              </li>
-            )}
-          </ul>
-        </nav>
+              {/* Admin Dashboard for admin users */}
+              {isAuthenticated && userRole === 'admin' && (
+                <li>
+                  <Link
+                    to="/admin"
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: isActive('/admin') ? '#38A169' : '#2F855A',
+                      color: 'white',
+                      boxShadow: isActive('/admin') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Admin Dashboard
+                  </Link>
+                </li>
+              )}
+
+              {/* Dashboard for non-admin users */}
+              {isAuthenticated && userRole !== 'admin' && (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: isActive('/dashboard') ? 'white' : 'transparent',
+                      color: isActive('/dashboard') ? '#2B6CB0' : 'white',
+                      boxShadow: isActive('/dashboard') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+
+              {/* Logout button */}
+              {isAuthenticated && (
+                <li>
+                  <button
+                    onClick={logout}
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: '#F56565',
+                      color: 'white',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+            </ul>
+          </nav>
+        </div>
+
+        {/* Conditionally render CategoryFilter only on Home page */}
+        {location.pathname === '/' && <CategoryFilter selectedCategory={null} setSelectedCategory={null} />}
       </div>
     </header>
   );
