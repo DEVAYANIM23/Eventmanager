@@ -1,23 +1,21 @@
-// PrivateRoute.js
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
 
 const PrivateRoute = ({ children, adminOnly }) => {
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const user = useAuthStore((state) => state.user);
+  const { isAuthenticated, user } = useAuthStore((state) => state);
 
-  // If not authenticated, redirect to login
   if (!isAuthenticated) {
+    // Redirect to login if not authenticated
     return <Navigate to="/login" />;
   }
 
-  // If adminOnly is set, check if user is an admin
   if (adminOnly && user?.role !== "admin") {
+    // If trying to access an admin route, redirect to user dashboard if not admin
     return <Navigate to="/dashboard" />;
   }
 
-  return children;
+  return children; // If authenticated and authorized, render the child component
 };
 
 export default PrivateRoute;

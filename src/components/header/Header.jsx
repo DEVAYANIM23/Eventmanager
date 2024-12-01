@@ -1,11 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../store/authStore';
-import CategoryFilter from './CategoryFilter'; // Make sure you import CategoryFilter
+import { useAuthStore } from '../../store/authStore';
+import CategoryFilter from '../category/CategoryFilter'; // Make sure you import CategoryFilter
 
 function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  const userRole = useAuthStore((state) => state.user?.role);
+  const userRole = useAuthStore((state) => state.user?.role); // Assuming user role is stored here
   const logout = useAuthStore((state) => state.logout);
 
   const location = useLocation();
@@ -56,6 +56,72 @@ function Header() {
                 </Link>
               </li>
 
+              {/* Admin Dashboard Link */}
+              {isAuthenticated && userRole === 'admin' && (
+                <li>
+                  <Link
+                    to="/admin"
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: isActive('/admin-dashboard') ? 'white' : 'transparent',
+                      color: isActive('/admin-dashboard') ? '#2B6CB0' : 'white',
+                      boxShadow: isActive('/admin-dashboard') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Admin Dashboard
+                  </Link>
+                </li>
+              )}
+
+              {/* Dashboard Link (Non-admin) */}
+              {isAuthenticated && userRole !== 'admin' && (
+                <li>
+                  <Link
+                    to="/dashboard"
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: isActive('/dashboard') ? 'white' : 'transparent',
+                      color: isActive('/dashboard') ? '#2B6CB0' : 'white',
+                      boxShadow: isActive('/dashboard') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+              )}
+
+              {/* Logout Button */}
+              {isAuthenticated && (
+                <li>
+                  <button
+                    onClick={logout}
+                    style={{
+                      padding: '8px 16px',
+                      width: '128px',
+                      textAlign: 'center',
+                      borderRadius: '8px',
+                      fontWeight: 'bold',
+                      backgroundColor: '#F56565',
+                      color: 'white',
+                      border: 'none',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    Logout
+                  </button>
+                </li>
+              )}
+
               {/* Show Login/Sign Up for unauthenticated users */}
               {!isAuthenticated && (
                 <>
@@ -96,72 +162,6 @@ function Header() {
                     </Link>
                   </li>
                 </>
-              )}
-
-              {/* Admin Dashboard for admin users */}
-              {isAuthenticated && userRole === 'admin' && (
-                <li>
-                  <Link
-                    to="/admin"
-                    style={{
-                      padding: '8px 16px',
-                      width: '128px',
-                      textAlign: 'center',
-                      borderRadius: '8px',
-                      fontWeight: 'bold',
-                      backgroundColor: isActive('/admin') ? '#38A169' : '#2F855A',
-                      color: 'white',
-                      boxShadow: isActive('/admin') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Admin Dashboard
-                  </Link>
-                </li>
-              )}
-
-              {/* Dashboard for non-admin users */}
-              {isAuthenticated && userRole !== 'admin' && (
-                <li>
-                  <Link
-                    to="/dashboard"
-                    style={{
-                      padding: '8px 16px',
-                      width: '128px',
-                      textAlign: 'center',
-                      borderRadius: '8px',
-                      fontWeight: 'bold',
-                      backgroundColor: isActive('/dashboard') ? 'white' : 'transparent',
-                      color: isActive('/dashboard') ? '#2B6CB0' : 'white',
-                      boxShadow: isActive('/dashboard') ? '0px 2px 4px rgba(0, 0, 0, 0.1)' : 'none',
-                      textDecoration: 'none',
-                    }}
-                  >
-                    Dashboard
-                  </Link>
-                </li>
-              )}
-
-              {/* Logout button */}
-              {isAuthenticated && (
-                <li>
-                  <button
-                    onClick={logout}
-                    style={{
-                      padding: '8px 16px',
-                      width: '128px',
-                      textAlign: 'center',
-                      borderRadius: '8px',
-                      fontWeight: 'bold',
-                      backgroundColor: '#F56565',
-                      color: 'white',
-                      border: 'none',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Logout
-                  </button>
-                </li>
               )}
             </ul>
           </nav>

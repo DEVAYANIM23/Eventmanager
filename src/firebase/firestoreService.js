@@ -1,54 +1,96 @@
-import { db } from '../firebaseConfig';  // Import Firestore instance from firebaseConfig
-import { collection, getDocs, addDoc, deleteDoc, doc } from 'firebase/firestore';  // Firestore methods
+import { db } from "./firebaseConfig";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  setDoc,
+  deleteDoc,
+  query,
+  where,
+} from "firebase/firestore";
 
-// Fetch events from Firestore
+// Fetch all events
 export const getEvents = async () => {
   try {
-    const eventsCollection = collection(db, "events"); // Reference to "events" collection
-    const snapshot = await getDocs(eventsCollection); // Fetch the data
-    const events = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    return events;
+    const eventsCollection = collection(db, "events");
+    const snapshot = await getDocs(eventsCollection);
+    return snapshot.docs.map((doc) => ({
+      id: doc.id,
+      title: doc.data().title || "Unnamed Event",
+      ...doc.data(),
+    }));
   } catch (error) {
     console.error("Error fetching events:", error);
-    throw error;  // Rethrow to handle further up
+    throw error;
   }
 };
 
-// Add a new event to Firestore
-export const addEvent = async (eventData) => {
+// Fetch a single event by ID
+export const getEvent = async (id) => {
   try {
-    const eventsCollection = collection(db, "events");
-    const docRef = await addDoc(eventsCollection, eventData);
-    console.log("Event added with ID: ", docRef.id);
-    return docRef.id; // Return the new document ID if needed
+    const docRef = doc(db, "events", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return { id: docSnap.id, ...docSnap.data() };
+    }
+    throw new Error("Event not found");
+  } catch (error) {
+    console.error("Error fetching event:", error);
+    throw error;
+  }
+};
+
+// Add a new event
+export const addEvent = async (eventData, id = null) => {
+  try {
+    const docRef = id ? doc(db, "events", id) : doc(collection(db, "events"));
+    await setDoc(docRef, eventData);
+    return docRef.id;
   } catch (error) {
     console.error("Error adding event:", error);
-    throw error;  // Rethrow to handle further up
+    throw error;
   }
 };
 
-// Delete an event from Firestore
+// Update an event
+export const updateEvent = async (id, updatedData) => {
+  try {
+    const eventDocRef = doc(db, "events", id);
+    await setDoc(eventDocRef, updatedData, { merge: true });
+    console.log(`Event with ID: ${id} updated.`);
+  } catch (error) {
+    console.error("Error updating event:", error);
+    throw error;
+  }
+};
+
+// Delete an event
 export const deleteEvent = async (eventId) => {
   try {
-    const eventDocRef = doc(db, "events", eventId);  // Reference to the event document
-    await deleteDoc(eventDocRef);  // Delete the document
-    console.log(`Event with ID: ${eventId} deleted successfully.`);
+    const eventDocRef = doc(db, "events", eventId);
+    await deleteDoc(eventDocRef);
+    console.log(`Event with ID: ${eventId} deleted.`);
   } catch (error) {
     console.error("Error deleting event:", error);
-    throw error;  // Rethrow to handle further up
+    throw error;
   }
 };
 
-// Optional: Fetch events by a specific field (e.g., upcoming events)
+// Fetch upcoming events
 export const getUpcomingEvents = async () => {
   try {
     const eventsCollection = collection(db, "events");
-    const q = query(eventsCollection, where("date", ">=", new Date())); // Fetch events with date >= today
+    const today = new Date();
+    const q = query(eventsCollection, where("date", ">=", today));
     const snapshot = await getDocs(q);
-    const events = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-    return events;
+    return snapshot.docs.map((doc) => ({
+      id: doc.id,
+      title: doc.data().title,
+      ...doc.data(),
+    }));
   } catch (error) {
     console.error("Error fetching upcoming events:", error);
-    throw error;  // Rethrow to handle further up
+    throw error;
   }
 };

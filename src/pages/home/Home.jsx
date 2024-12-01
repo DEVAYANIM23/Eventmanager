@@ -1,8 +1,8 @@
 // HomePage.jsx
 import React, { useState, useEffect } from "react";
-import { getEvents } from "../firebase/firestoreService";
-import EventCard from "../components/EventCard";
-import CategoryFilter from "../components/CategoryFilter";
+import { getEvents } from "../../firebase/firestoreService";
+import EventCard from "../../components/admin/EventCard";
+import CategoryFilter from "../../components/category/CategoryFilter";
 
 function HomePage() {
   const [events, setEvents] = useState([]);

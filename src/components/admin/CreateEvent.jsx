@@ -2,8 +2,8 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { Calendar, MapPin } from 'lucide-react';
-import { addEvent } from '../firebase/firestoreService';
-import './CreateEvent.css'; // Import the CSS file
+import { addEvent } from '../../firebase/firestoreService';
+import '../admin/CreateEvent.css'; // Import the CSS file
 
 const categories = [
   { id: 'music', name: 'Music' },

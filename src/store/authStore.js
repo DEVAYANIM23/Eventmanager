@@ -6,11 +6,11 @@ import {
   createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { doc, getDoc, setDoc, collection, getDocs, deleteDoc } from "firebase/firestore";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "../firebase/firebaseConfig";
 
 const useAuthStore = create((set) => ({
-  user: null,
-  isAuthenticated: false,
+  user: JSON.parse(localStorage.getItem("user")) || null, // Initialize user from localStorage
+  isAuthenticated: localStorage.getItem("isAuthenticated") === "true", // Get the auth state from localStorage
   loggedInUsers: [],
 
   // Fetch all users from Firestore
@@ -38,6 +38,10 @@ const useAuthStore = create((set) => ({
         isAuthenticated: true,
       });
 
+      // Save to localStorage for persistence
+      localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("user", JSON.stringify({ uid: user.uid, email, name, role }));
+
       return role === "admin" ? "admin" : "user";
     } catch (error) {
       console.error("Signup error:", error);
@@ -59,6 +63,10 @@ const useAuthStore = create((set) => ({
           isAuthenticated: true,
         });
 
+        // Save to localStorage for persistence
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("user", JSON.stringify({ uid: user.uid, email, name: userData.name, role: userData.role }));
+
         return userData.role === "admin" ? "admin" : "user";
       }
     } catch (error) {
@@ -71,6 +79,10 @@ const useAuthStore = create((set) => ({
   logout: async () => {
     await signOut(auth);
     set({ user: null, isAuthenticated: false });
+
+    // Remove from localStorage on logout
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("user");
   },
 
   // Listen to auth state changes
@@ -79,13 +91,22 @@ const useAuthStore = create((set) => ({
       if (user) {
         const userDoc = await getDoc(doc(db, "users", user.uid));
         if (userDoc.exists()) {
+          const userData = userDoc.data();
           set({
-            user: { uid: user.uid, ...userDoc.data() },
+            user: { uid: user.uid, ...userData },
             isAuthenticated: true,
           });
+
+          // Store to localStorage for persistence
+          localStorage.setItem("isAuthenticated", "true");
+          localStorage.setItem("user", JSON.stringify({ uid: user.uid, ...userData }));
         }
       } else {
         set({ user: null, isAuthenticated: false });
+
+        // Clear localStorage on logout
+        localStorage.removeItem("isAuthenticated");
+        localStorage.removeItem("user");
       }
     });
   },

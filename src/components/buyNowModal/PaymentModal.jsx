@@ -9,11 +9,11 @@ export default function PaymentModal({ isOpen, setIsOpen, price, buyNowFunction,
 
     const launchRazorPay = () => {
         const options = {
-            key: "rzp_test_IbDHHibs2KvP1M",
+            key: "rzp_test_OfAYJ0dWqrCaUY",
             amount: price * 100, // amount in paisa
             currency: "INR",
-            name: "Eventmanager",
-            description: "event platfrom",
+            name: "Shree Kalishvari Furnitures",
+            description: "Furniture Shop",
             image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Unicode_0x004B.svg/1200px-Unicode_0x004B.svg.png",
             handler: function (response) {
                 setIsOpen(false);
@@ -22,8 +22,8 @@ export default function PaymentModal({ isOpen, setIsOpen, price, buyNowFunction,
                 clearCart(); // Clear the cart after successful order placement
             },
             prefill: {
-                name: "EventManager",
-                email: "eventmanager@gmail.com",
+                name: "Shree Kalishvari Furnitures",
+                email: "shreekalishvari@gmail.com",
                 contact: "6380044993"
             },
             theme: { color: "#252525" }
