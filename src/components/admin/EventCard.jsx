@@ -72,12 +72,12 @@ function EventCard({ event }) {
       <div className="p-4 bg-gray-100 border-t flex justify-between items-center">
         <Link
           to={`/events/${event.id}`}
-          className="text-indigo-600 text-sm font-medium hover:underline"
+          className="text-blue-600 text-sm font-medium hover:underline"
         >
           View Details
         </Link>
         <button
-          className="px-4 py-2 bg-indigo-600 text-white text-sm rounded-lg hover:bg-indigo-700"
+          className="px-4 py-2 bg-blue-500 text-white text-sm rounded-lg hover:bg-blue-600"
           onClick={() => alert(`Book event: ${event.title}`)}
         >
           Book Now

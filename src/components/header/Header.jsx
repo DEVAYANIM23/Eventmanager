@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthStore } from '../../store/authStore';
-import CategoryFilter from '../category/CategoryFilter'; // Make sure you import CategoryFilter
+import { useAuthStore } from '../../store/authStore'; // Assuming this is your store
+import SearchBar from '../admin/SearchBar'; // Import SearchBar component
 
 function Header() {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
@@ -23,7 +23,7 @@ function Header() {
         zIndex: 10,
         backgroundColor: '#2563EB',
         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
-        padding: '17px 0',
+        padding: '11px 0',
       }}
     >
       <div style={{ maxWidth: '1120px', margin: '0 auto', padding: '0 16px' }}>
@@ -32,6 +32,12 @@ function Header() {
           <Link to="/" style={{ fontSize: '24px', fontWeight: 'bold', color: 'white' }}>
             Event Manager
           </Link>
+
+          {/* Search Bar Component */}
+          <div className="search-bar-wrapper">
+    <SearchBar />
+</div>
+
 
           {/* Navigation */}
           <nav>
@@ -166,9 +172,6 @@ function Header() {
             </ul>
           </nav>
         </div>
-
-        {/* Conditionally render CategoryFilter only on Home page */}
-        {location.pathname === '/' && <CategoryFilter selectedCategory={null} setSelectedCategory={null} />}
       </div>
     </header>
   );

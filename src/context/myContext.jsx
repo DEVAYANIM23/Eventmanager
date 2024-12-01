@@ -1,17 +1,22 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect } from "react";
 
-const MyContext = createContext();
-
-export const useMyContext = () => {
-  return useContext(MyContext);
-};
+const myContext = createContext();
 
 export const MyContextProvider = ({ children }) => {
-  const [value, setValue] = useState("default value");
+  const [getAllProduct, setGetAllProduct] = useState([]);
+
+  useEffect(() => {
+    // Example: Fetch the product list from an API or local data source
+    fetch("/api/products") // Replace with your actual data source
+      .then((res) => res.json())
+      .then((data) => setGetAllProduct(data));
+  }, []);
 
   return (
-    <MyContext.Provider value={{ value, setValue }}>
+    <myContext.Provider value={{ getAllProduct }}>
       {children}
-    </MyContext.Provider>
+    </myContext.Provider>
   );
 };
+
+export default myContext;

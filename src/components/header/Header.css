@@ -1,0 +1,122 @@
+/* General Header Styles */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: #2563eb;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 0;
+}
+
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 8px;
+}
+
+/* Search Bar Container */
+.search-bar-container {
+    flex: 1;
+    margin: 0 16px;
+    max-width: 300px; /* Default size */
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+}
+
+.responsive-search-bar {
+    height: 30px;
+    font-size: 14px;
+    width: 100%;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Navigation Styles */
+.nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-link {
+    padding: 8px 16px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    background-color: transparent;
+    color: white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-link.active {
+    background-color: white;
+    color: #2b6cb0;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logout-button {
+    padding: 8px 16px;
+    text-align: center;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: #f56565;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .search-bar-container {
+        max-width: 200px; /* Adjust for medium screens */
+    }
+    .responsive-search-bar {
+        font-size: 13px;
+        padding: 3px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .search-bar-container {
+        max-width: 150px; /* Adjust for small screens */
+    }
+    .responsive-search-bar {
+        font-size: 12px;
+        padding: 2px 4px;
+    }
+}
+
+@media (max-width: 320px) {
+    .search-bar-container {
+        max-width: 120px; /* Further adjustment for very small screens */
+    }
+    .responsive-search-bar {
+        font-size: 10px;
+        padding: 1px 3px;
+    }
+}

@@ -1,278 +1,221 @@
 /* User and Event Section Styling */
 
-
-
 /* Table Row Hover Effect */
 .user-table tbody tr:hover, .event-table tbody tr:hover {
-    background-color: #f9fafb;
+  background-color: #f9fafb;
 }
 
 /* Buttons Styling */
 
 /* Delete Button */
 .delete-button {
-    background-color: #dc2626; /* Red color */
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #dc2626; /* Red color */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .delete-button:hover {
-    background-color: #b91c1c; /* Darker red on hover */
+  background-color: #b91c1c; /* Darker red on hover */
 }
 
 /* Update Button */
 .update-button {
-    background-color: #16a34a; /* Green color */
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  background-color: #16a34a; /* Green color */
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .update-button:hover {
-    background-color: #15803d; /* Darker green on hover */
+  background-color: #15803d; /* Darker green on hover */
 }
 
 /* User List Section */
 .user-list {
-    margin-top: 2rem;
-    padding: 1rem;
-    background-color: #f9fafb;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .user-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb;
 }
 
 .user-item:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .user-name {
-    font-weight: 600;
-    color: #3b82f6; /* Blue color for user name */
-    font-size: 1.1rem;
+  font-weight: 600;
+  color: #3b82f6; /* Blue color for user name */
+  font-size: 1.1rem;
 }
 
 .user-email {
-    font-size: 0.875rem;
-    color: #4a5568;
+  font-size: 0.875rem;
+  color: #4a5568;
 }
 
 .user-item:hover {
-    background-color: #f9fafb;
+  background-color: #f9fafb;
 }
 
 .user-item button {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
 }
 
 /* Event Card */
 .event-card {
-    background-color: #f9fafb;
-    padding: 1.25rem;
-    border-radius: 0.5rem;
-    border: 1px solid #d1d5db;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+  background-color: #f9fafb;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .event-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .event-title {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #2d3748;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #2d3748;
 }
 
 .event-description {
-    color: #4a5568;
-    font-size: 0.875rem;
+  color: #4a5568;
+  font-size: 0.875rem;
 }
 
 .event-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.875rem;
-    color: #718096;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  color: #718096;
 }
 
 /* Event Table Styling */
 .event-table th, .user-table th {
-    background-color: #3b82f6;
-    color: white;
-    padding: 1rem;
-    text-align: left;
+  background-color: #3b82f6; /* Blue color for header */
+  color: white;
+  padding: 1rem;
+  text-align: left;
+  font-size: 1rem;
+  border-right: 2px solid #e5e7eb; /* Add border between columns */
+}
+
+/* Last column header (no border on right) */
+.event-table th:last-child, .user-table th:last-child {
+  border-right: none;
 }
 
 .event-table td, .user-table td {
-    padding: 1rem;
-    text-align: left;
-    border: 1px solid #e5e7eb;
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid #e5e7eb; /* Add border around each cell */
+  border-right: 2px solid #e5e7eb; /* Border between columns */
+}
+
+/* Last column cell (no border on right) */
+.event-table td:last-child, .user-table td:last-child {
+  border-right: none;
 }
 
 /* Add spacing between event rows */
 .event-table tbody tr {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-/* Table Row Hover Effect */
-.event-table tbody tr:hover, .user-table tbody tr:hover {
-    background-color: #f9fafb;
+/* Event Table Row Hover Effect */
+.event-table tbody tr:hover {
+  background-color: #f9fafb; /* Light hover effect for rows */
 }
+
 /* General Styling for Events */
 .events-heading {
-    color: #1D4ED8; /* Blue color for the heading */
-    font-size: 1.875rem; /* 30px */
-    font-weight: 600; /* Semi-bold */
-    margin-bottom: 20px;
-  }
-  
-  .events-table {
-    border-collapse: collapse;
-    width: 100%;
-  }
-  
-  .events-table th,
-  .events-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Light gray border for rows */
-  }
-  
-  .events-table th {
-    background-color: #f3f4f6; /* Light gray background for header */
-    font-size: 0.875rem; /* 14px */
-    color: #4B5563; /* Darker gray text for headers */
-  }
-  
-  .events-table tr:hover {
-    background-color: #f1f5f9; /* Light hover effect for rows */
-  }
-  
-  /* Action Buttons Styling */
-  button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.875rem; /* 14px */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .text-blue-500:hover {
-    color: #1D4ED8;
-  }
-  
-  .text-red-500:hover {
-    color: #EF4444;
-  }
-  
-  .mr-3 {
-    margin-right: 12px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    /* Responsive styling */
-    .events-table th,
-    .events-table td {
-      padding: 8px;
-    }
-  
-    .events-table {
-      font-size: 0.75rem; /* 12px */
-    }
-  
-    .events-heading {
-      font-size: 1.5rem; /* 24px */
-    }
+  color: #1D4ED8; /* Blue color for the heading */
+  font-size: 1.875rem; /* 30px */
+  font-weight: 600; /* Semi-bold */
+  margin-bottom: 20px;
+  border-bottom: 2px solid #3b82f6; /* Blue border under heading */
+  padding-bottom: 10px;
+}
 
-    /* Event and User Table Header Styling */
-.events-table th, .user-table th {
-    background-color: #3b82f6; /* Blue background for table headers */
-    color: white; /* White text color */
-    font-size: 0.875rem; /* Smaller font size for table headers */
-    font-weight: bold;
-    text-align: left;
+
+/* Action Buttons Styling */
+button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.875rem; /* 14px */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #f3f4f6;
+}
+
+.text-blue-500:hover {
+  color: #1D4ED8;
+}
+
+.text-red-500:hover {
+  color: #EF4444;
+}
+
+.mr-3 {
+  margin-right: 12px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  /* Responsive styling */
+  .events-table th, .events-table td {
+    padding: 5px;
+  }
+
+  .events-table {
+    font-size: 0.75rem; /* 12px */
+  }
+
+  .events-heading {
+    font-size: 1.5rem; /* 24px */
+    margin-bottom: 15px; /* Adjust margin for smaller screens */
+  }
+
+  /* Adjust table column headers */
+  .event-table th {
+    font-size: 0.875rem; /* Smaller font size for headers on small screens */
+  }
+
+  .event-table td {
+    font-size: 0.75rem; /* Adjust table cell font size */
+  }
+
+  .events-section {
     padding: 1rem;
   }
-  
-  /* General Styling for Event and User Tables */
-  .events-table th, .user-table th, .events-table td, .user-table td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd; /* Light gray border for rows */
+
+  .event-card {
+    margin-bottom: 1rem;
   }
+
   
-  .events-table tr:hover, .user-table tr:hover {
-    background-color: #f1f5f9; /* Light hover effect for rows */
-  }
-  
-  /* User Table Actions */
-  .user-table td {
-    padding: 1rem;
-    text-align: left;
-    border: 1px solid #e5e7eb;
-  }
-  
-  /* Action Buttons Styling */
-  button {
-    padding: 6px 12px;
-    border-radius: 4px;
-    font-size: 0.875rem; /* 14px */
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  button:hover {
-    background-color: #f3f4f6;
-  }
-  
-  .text-blue-500:hover {
-    color: #1D4ED8; /* Blue text on hover */
-  }
-  
-  .text-red-500:hover {
-    color: #EF4444; /* Red text on hover */
-  }
-  
-  .mr-3 {
-    margin-right: 12px;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .events-table th, .events-table td, .user-table th, .user-table td {
-      padding: 8px;
-    }
-  
-    .events-table, .user-table {
-      font-size: 0.75rem; /* 12px */
-    }
-  
-    .events-heading {
-      font-size: 1.5rem; /* 24px */
-    }
-  }
-  
-    
-  }
-  
+}
 

@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { BarChart3, Users, Calendar, PlusCircle } from "lucide-react";
 import { getEvents, deleteEvent } from "../../firebase/firestoreService"; // Import Firestore functions
 import { useAuthStore } from "../../store/authStore";
-import "./AdminDashboard.css";
 
 const AdminDashboard = () => {
   const navigate = useNavigate();
@@ -152,49 +151,51 @@ const AdminDashboard = () => {
                 {loading ? (
                   <p className="text-center text-gray-500">Loading events...</p>
                 ) : (
-                  <table className="min-w-full divide-y divide-gray-200">
-                    <thead>
-                      <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Event Title</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Location</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Venue</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booked Tickets</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {events.map((event) => (
-                        <tr key={event.id}>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{event.title}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.description}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(event.date.seconds * 1000).toLocaleDateString()}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.location}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.venue}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${event.price}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.bookedTickets || 0}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{event.category}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <button
-                              onClick={() => handleUpdateEvent(event.id)}
-                              className="text-indigo-600 hover:text-indigo-900 mr-3"
-                            >
-                              Update
-                            </button>
-                            <button
-                              onClick={() => handleDeleteEvent(event.id)}
-                              className="text-red-600 hover:text-red-900"
-                            >
-                              Delete
-                            </button>
-                          </td>
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200 table-auto">
+                      <thead className="bg-blue-600 text-white">
+                        <tr>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Event Title</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Description</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Date</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Location</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Venue</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Price</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Booked Tickets</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Category</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {events.map((event) => (
+                          <tr key={event.id}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r border-gray-300">{event.title}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{event.description}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{new Date(event.date.seconds * 1000).toLocaleDateString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{event.location}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{event.venue}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">${event.price}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{event.bookedTickets || 0}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{event.category}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                              <button
+                                onClick={() => handleUpdateEvent(event.id)}
+                                className="text-indigo-600 hover:text-indigo-900 mr-3"
+                              >
+                                Update
+                              </button>
+                              <button
+                                onClick={() => handleDeleteEvent(event.id)}
+                                className="text-red-600 hover:text-red-900"
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
                 )}
               </div>
             )}
@@ -202,33 +203,39 @@ const AdminDashboard = () => {
             {activeTab === "users" && (
               <div className="bg-white p-6 rounded-lg shadow">
                 <h2 className="text-lg font-semibold text-gray-700 mb-4">Users</h2>
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead>
-                    <tr>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {loggedInUsers.map((user) => (
-                      <tr key={user.id}>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{user.name}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.email}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{user.role}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                          <button
-                            onClick={() => handleDeleteUser(user.id)}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
+                {loading ? (
+                  <p className="text-center text-gray-500">Loading users...</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="min-w-full divide-y divide-gray-200 table-auto">
+                      <thead className="bg-blue-600 text-white">
+                        <tr>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Name</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Email</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider border-r border-gray-300">Role</th>
+                          <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {loggedInUsers.map((user) => (
+                          <tr key={user.id}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 border-r border-gray-300">{user.name}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{user.email}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 border-r border-gray-300">{user.role}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                              <button
+                                onClick={() => handleDeleteUser(user.id)}
+                                className="text-red-600 hover:text-red-900"
+                              >
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             )}
           </div>
